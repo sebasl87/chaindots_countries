@@ -1,12 +1,13 @@
 import "./App.css";
 import { Header } from "./components";
+import Home from "./Screen/Home";
 
 function App() {
   return (
     <div className="App">
       <Header />
       <body className="App-body">
-        <p>HOLAMUNDO</p>
+        <Home />
       </body>
     </div>
   );
