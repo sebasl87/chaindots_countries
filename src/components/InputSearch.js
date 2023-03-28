@@ -1,3 +1,4 @@
+import React from "react";
 import SearchIcon from "@mui/icons-material/Search";
 
 import { InputAdornment, TextField } from "@mui/material";
@@ -10,7 +11,7 @@ export const InputSearch = ({
     <TextField
       sx={{ boxShadow: 3, width: "100%", maxWidth: "500px" }}
       id="input-with-sx"
-      placeholder="Search for a country..."
+      placeholder={placeHolder}
       variant="outlined"
       InputProps={{
         startAdornment: (
