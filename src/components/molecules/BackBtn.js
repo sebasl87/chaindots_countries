@@ -27,7 +27,11 @@ const Button = styled.button`
 export default function BackBtn({ handleClick, darkMode }) {
   return (
     <Box mt={5} mb={10} display="flex">
-      <Button onClick={handleClick} darkMode={darkMode}>
+      <Button
+        onClick={handleClick}
+        darkMode={darkMode}
+        id="goBackClick"
+      >
         <ArrowBackIcon />
         <Typography ml={1}>Back</Typography>
       </Button>
