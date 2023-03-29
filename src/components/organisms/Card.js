@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Flag from "../molecules/Flag";
 import TitleCountry from "../atoms/TitleCountry";
 import Property from "../molecules/Property";
+import { useNavigate } from "react-router-dom";
 
 const ContainerCard = styled.div`
   display: flex;
@@ -28,8 +29,13 @@ const ContainerText = styled.div`
 `;
 
 const Card = ({ flag, country, population, region, capital }) => {
+  const navigate = useNavigate();
+
   return (
-    <Box sx={{ display: "flex", justifyContent: "center", width: "100%" }}>
+    <Box
+      sx={{ display: "flex", justifyContent: "center", width: "100%" }}
+      onClick={() => navigate("/details/", { state: { countryName: country } })}
+    >
       <ContainerCard>
         <Flag flag={flag} />
         <ContainerText>

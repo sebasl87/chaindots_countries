@@ -23,10 +23,10 @@ const Button = styled.button`
     opacity: 0.7;
   }
 `;
-export default function BackBtn() {
+export default function BackBtn({ handleClick }) {
   return (
     <Box marginY={10} display="flex">
-      <Button>
+      <Button onClick={handleClick}>
         <ArrowBackIcon />
         <Typography ml={1}>Back</Typography>
       </Button>
