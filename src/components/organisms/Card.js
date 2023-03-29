@@ -1,17 +1,19 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useContext } from "react";
 import styled from "styled-components";
 import Flag from "../molecules/Flag";
 import TitleCountry from "../atoms/TitleCountry";
 import Property from "../molecules/Property";
 import { useNavigate } from "react-router-dom";
+import { CountryContext } from "../../App";
 
 const ContainerCard = styled.div`
   display: flex;
+  cursor: pointer;
   width: 100%;
   max-width: 300px;
   flex-direction: column;
-  background: #fff;
+  background: ${(props) => (props.dark ? "#2B3743" : "#fff")};
   margin-left: 16px;
   margin-right: 16px;
   margin-top: 24px;
@@ -30,13 +32,14 @@ const ContainerText = styled.div`
 
 const Card = ({ flag, country, population, region, capital }) => {
   const navigate = useNavigate();
+  const { darkMode } = useContext(CountryContext);
 
   return (
     <Box
       sx={{ display: "flex", justifyContent: "center", width: "100%" }}
       onClick={() => navigate("/details/", { state: { countryName: country } })}
     >
-      <ContainerCard>
+      <ContainerCard dark={darkMode}>
         <Flag flag={flag} />
         <ContainerText>
           <TitleCountry title={country} />

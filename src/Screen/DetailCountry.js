@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { BackBtn, BorderCountries, Flag, TitleCountry } from "../components";
 import Property from "../components/molecules/Property";
@@ -9,21 +9,25 @@ import {
   fetchCountryByName,
 } from "../services/country-services";
 import { CircularProgress } from "@mui/material";
+import { CountryContext } from "../App";
 
 const Layout = styled.div`
   display: flex;
-  width: 100%;
-  max-width: 1200px;
   justify-content: center;
+  margin: auto;
+  max-width: 1200px;
+  width: 100%;
 `;
 
 const ContainerCard = styled.div`
   display: flex;
-  width: 100%;
   flex-direction: column;
+  width: 100%;
 `;
 
 export default function DetailCountry() {
+  const { darkMode } = useContext(CountryContext);
+
   const navigate = useNavigate();
   const {
     state: { countryName },
@@ -39,7 +43,7 @@ export default function DetailCountry() {
 
   useEffect(() => {
     countryName && fetchDataForCountry();
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countryName]);
 
   useEffect(() => {
@@ -55,7 +59,7 @@ export default function DetailCountry() {
   return (
     <Layout>
       <ContainerCard>
-        <BackBtn handleClick={() => navigate(-1)} />
+        <BackBtn handleClick={() => navigate(-1)} darkMode={darkMode} />
         {countryInformation ? (
           <Box display="flex" justifyContent="space-between" width="100%">
             <Flag flag={countryInformation?.flags.svg} xl />
@@ -65,9 +69,9 @@ export default function DetailCountry() {
                 display="flex"
                 width="100%"
                 justifyContent="space-between"
-                mb={6}
+                mb={5}
               >
-                <Box display="flex" flexDirection="column">
+                <Box display="flex" flexDirection="column" width="50%">
                   <Property mb="12px" title="Native Name:" value="Belgie" />
                   <Property
                     mb="12px"
@@ -90,7 +94,7 @@ export default function DetailCountry() {
                     value={countryInformation?.capital[0]}
                   />
                 </Box>
-                <Box display="flex" flexDirection="column">
+                <Box display="flex" flexDirection="column" width="50%">
                   <Property
                     mb="12px"
                     title="Top Level Domain:"
@@ -113,7 +117,10 @@ export default function DetailCountry() {
                 </Box>
               </Box>
               {borders ? (
-                <BorderCountries borderCountriesToMap={borders} />
+                <BorderCountries
+                  borderCountriesToMap={borders}
+                  handleDarkMode={darkMode}
+                />
               ) : (
                 <CircularProgress color="success" />
               )}

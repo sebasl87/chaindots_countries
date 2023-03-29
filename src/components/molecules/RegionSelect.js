@@ -2,14 +2,27 @@ import React from "react";
 
 import { FormControl, MenuItem, Select } from "@mui/material";
 
-export const RegionSelect = ({ value, handleChange }) => {
+export const RegionSelect = ({ value, handleChange, darkMode }) => {
   return (
     <FormControl sx={{ minWidth: 200, boxShadow: 3 }}>
       <Select
         value={value}
         onChange={handleChange}
         displayEmpty
-        inputProps={{ "aria-label": "Without label" }}
+        sx={{
+          backgroundColor: darkMode && "#202C37",
+          color: darkMode && "#fff",
+        }}
+        inputProps={{
+          MenuProps: {
+            MenuListProps: {
+              sx: {
+                backgroundColor: darkMode && "#202C37",
+                color: darkMode && "#fff",
+              },
+            },
+          },
+        }}
       >
         <MenuItem value="">
           <em>Filter by Region</em>
