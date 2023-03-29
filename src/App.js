@@ -4,6 +4,7 @@ import { Header } from "./components";
 import DetailCountry from "./Screen/DetailCountry";
 import Home from "./Screen/Home";
 import { fetchAllCountries } from "./services/country-services";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export const CountryContext = createContext();
 function App() {
@@ -25,8 +26,12 @@ function App() {
       <div className="App">
         <Header />
         <body className="App-body">
-          <Home />
-          {/* <DetailCountry/> */}
+          <BrowserRouter>
+            <Routes>
+              <Route path="/" element={<Home />} />
+              <Route path="/details" element={<DetailCountry />} />
+            </Routes>
+          </BrowserRouter>
         </body>
       </div>
     </CountryContext.Provider>

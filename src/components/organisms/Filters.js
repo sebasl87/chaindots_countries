@@ -10,8 +10,10 @@ export default function Header() {
       sx={{
         alignItems: "center",
         display: "flex",
-        justifyContent:"space-between",
+        justifyContent: "space-between",
         marginBottom: 2,
+        marginX: "16px",
+        maxWidth: "-webkit-fill-available",
         width: "100%",
       }}
     >

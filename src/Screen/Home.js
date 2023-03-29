@@ -24,21 +24,23 @@ export default function Home() {
   const { countries } = useContext(CountryContext);
 
   return (
-    <Layout>
-      <Filters />
-      <Table>
-        {countries &&
-          countries.map((el) => (
-            <Card
-              capital={el.capital[0]}
-              country={el.name.official}
-              flag={el.flags.svg}
-              key={el.name.official + "+" + el.idd.suffixes[0]}
-              population={el.population}
-              region={el.region}
-            />
-          ))}
-      </Table>
-    </Layout>
+    <>
+      <Layout>
+        <Filters />
+        <Table>
+          {countries &&
+            countries.map((el) => (
+              <Card
+                capital={el.capital[0]}
+                country={el.name.official}
+                flag={el.flags.svg}
+                key={el.name.official + "+" + el.idd.suffixes[0]}
+                population={el.population}
+                region={el.region}
+              />
+            ))}
+        </Table>
+      </Layout>
+    </>
   );
 }

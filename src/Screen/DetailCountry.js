@@ -3,6 +3,7 @@ import React from "react";
 import styled from "styled-components";
 import { BackBtn, BorderCountries, Flag, TitleCountry } from "../components";
 import Property from "../components/molecules/Property";
+import { useLocation, useNavigate } from "react-router-dom";
 
 const borderCountriesToMap = [
   { country: "France" },
@@ -24,10 +25,14 @@ const ContainerCard = styled.div`
 `;
 
 export default function DetailCountry() {
+  const navigate = useNavigate();
+
+  const location = useLocation();
+  console.log(location);
   return (
     <Layout>
       <ContainerCard>
-        <BackBtn />
+        <BackBtn handleClick={() => navigate(-1)} />
         <Box display="flex" justifyContent="space-between" width="100%">
           <Flag flag="https://flagcdn.com/be.svg" xl />
           <Box display="flex" width="100%" flexDirection="column">
