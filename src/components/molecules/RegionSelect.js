@@ -1,4 +1,4 @@
-import Reactn from "react";
+import React from "react";
 
 import { FormControl, MenuItem, Select } from "@mui/material";
 

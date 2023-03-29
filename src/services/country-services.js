@@ -33,3 +33,12 @@ export const fetchCountriesByRegion = async (region) => {
     }
   ).then((response) => response.json());
 };
+
+export const fetchCountriesByName = async (countryName) => {
+  return fetch(
+    `${process.env.REACT_APP_API_URL}name/${countryName}?fields=name,flags,capital,population,region,idd`,
+    {
+      method: "GET",
+    }
+  ).then((response) => response.json());
+};
