@@ -1,7 +1,7 @@
 import { Box } from "@mui/system";
 import React from "react";
 import styled from "styled-components";
-import Flag from "../atoms/Flag";
+import Flag from "../molecules/Flag";
 import TitleCountry from "../atoms/TitleCountry";
 import Property from "../molecules/Property";
 

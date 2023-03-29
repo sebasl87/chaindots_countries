@@ -1,5 +1,6 @@
 import "./App.css";
 import { Header } from "./components";
+import DetailCountry from "./Screen/DetailCountry";
 import Home from "./Screen/Home";
 
 function App() {
@@ -7,7 +8,8 @@ function App() {
     <div className="App">
       <Header />
       <body className="App-body">
-        <Home />
+        {/* <Home /> */}
+        <DetailCountry/>
       </body>
     </div>
   );

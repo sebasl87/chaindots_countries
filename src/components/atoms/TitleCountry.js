@@ -1,14 +1,15 @@
 import { Box } from "@mui/system";
 import React from "react";
 
-export default function TitleCountry({ title }) {
+export default function TitleCountry({ title, xl }) {
   return (
     <Box
       display="flex"
-      fontSize={20}
+      fontSize={xl ? 28 : 20}
       fontWeight={700}
       maxWidth={250}
-      mb={2}
+      mb={xl ? 3 : 2}
+      mt={xl ? 5 : 0}
       overflow="hidden"
       textOverflow="ellipsis"
     >
