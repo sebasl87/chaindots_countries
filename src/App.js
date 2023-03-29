@@ -1,4 +1,4 @@
-import React, { useMemo, createContext, useState, useEffect } from "react";
+import React, { createContext, useState, useEffect } from "react";
 import "./App.css";
 import { Header } from "./components";
 import DetailCountry from "./Screen/DetailCountry";
@@ -19,10 +19,8 @@ function App() {
     fetchData();
   }, []);
 
-  const countries = useMemo(() => countriesData, [countriesData]);
-
   return (
-    <CountryContext.Provider value={{ countries }}>
+    <CountryContext.Provider value={{ countriesData, setCountriesData }}>
       <div className="App">
         <Header />
         <body className="App-body">

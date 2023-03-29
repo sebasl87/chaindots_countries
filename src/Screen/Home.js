@@ -1,10 +1,11 @@
 import React, { useContext } from "react";
 import styled from "styled-components";
-import { dataCountry } from "../services/dataCountry";
-import { Card, Filters } from "../components";
+import { BackBtn, Card, Filters } from "../components";
 import { CountryContext } from "../App";
-import { CircularProgress } from "@mui/material";
+import { CircularProgress, Typography } from "@mui/material";
 import { Box } from "@mui/system";
+
+import { fetchAllCountries } from "../services/country-services";
 
 const Table = styled.div`
   display: grid;
@@ -23,15 +24,27 @@ const Layout = styled.div`
   width: 100%;
 `;
 export default function Home() {
-  const { countries } = useContext(CountryContext);
+  const { countriesData, setCountriesData } = useContext(CountryContext);
 
+  if (countriesData?.status === 404 || countriesData === 0) {
+    return (
+      <Box>
+        <BackBtn
+          handleClick={() => {
+            fetchAllCountries().then((data) => setCountriesData(data));
+          }}
+        />
+        <Typography variant="h4">No hemos encontrado resultados</Typography>
+      </Box>
+    );
+  }
   return (
     <>
       <Layout>
         <Filters />
         <Table>
-          {countries ? (
-            countries.map((el) => (
+          {countriesData ? (
+            countriesData.map((el) => (
               <Card
                 capital={el.capital[0]}
                 country={el.name.official}

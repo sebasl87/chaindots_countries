@@ -5,10 +5,11 @@ import { InputAdornment, TextField } from "@mui/material";
 
 export const InputSearch = ({
   placeHolder = "Search for a country...",
-  onClick,
+  handleChange,
 }) => {
   return (
     <TextField
+      onChange={handleChange}
       sx={{ boxShadow: 3, width: "100%", maxWidth: "500px" }}
       id="input-with-sx"
       placeholder={placeHolder}
