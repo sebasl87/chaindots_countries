@@ -11,7 +11,7 @@ import InputSearch from "../molecules/InputSearch";
 import RegionSelect from "../molecules/RegionSelect";
 
 export default function Filters() {
-  const { setCountriesData } = useContext(CountryContext);
+  const { setCountriesData, darkMode } = useContext(CountryContext);
   const [value, setValue] = useState("");
   const [searchText, setSearchText] = useState("");
 
@@ -49,8 +49,8 @@ export default function Filters() {
         width: "100%",
       }}
     >
-      <InputSearch handleChange={handleChangeInput} />
-      <RegionSelect value={value} handleChange={handleChangeSelect} />
+      <InputSearch handleChange={handleChangeInput} darkMode={darkMode} />
+      <RegionSelect value={value} handleChange={handleChangeSelect} darkMode={darkMode} />
     </Box>
   );
 }

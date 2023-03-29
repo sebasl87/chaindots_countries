@@ -25,7 +25,7 @@ const Button = styled.button`
 `;
 export default function BackBtn({ handleClick }) {
   return (
-    <Box marginY={10} display="flex">
+    <Box mt={5} mb={10} display="flex">
       <Button onClick={handleClick}>
         <ArrowBackIcon />
         <Typography ml={1}>Back</Typography>

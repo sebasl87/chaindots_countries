@@ -7,10 +7,11 @@ export default function TitleCountry({ title, xl }) {
       display="flex"
       fontSize={xl ? 28 : 20}
       fontWeight={700}
-      maxWidth={250}
+      maxWidth={xl ? "100%" : 250}
       mb={xl ? 3 : 2}
-      mt={xl ? 5 : 0}
+      mt={xl ? 4 : 0}
       overflow="hidden"
+      textAlign="left"
       textOverflow="ellipsis"
     >
       {title}
