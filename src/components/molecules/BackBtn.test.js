@@ -12,8 +12,8 @@ describe("BackBtn component", () => {
     expect(handleOnClickMock).toHaveBeenCalledTimes(1);
   });
 
-  it("should render successfully in dark mode", () => {
-    const { baseElement } = render(<BackBtn darkMode />);
+  it("should render successfully in dark mode and mobile", () => {
+    const { baseElement } = render(<BackBtn darkMode isMobile />);
 
     expect(baseElement).toBeTruthy();
   });

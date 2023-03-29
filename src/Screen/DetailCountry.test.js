@@ -36,7 +36,7 @@ describe("DetailCountry component", () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it("should render successfully in dark mode and click", () => {
+  it("should render successfully in dark mode mobile and click", () => {
     const { baseElement } = render(
       <CountryContext.Provider
         value={{

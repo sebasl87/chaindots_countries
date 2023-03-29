@@ -9,9 +9,9 @@ describe("Flag component", () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it("should render successfully in xl", () => {
+  it("should render successfully in xl and mobile", () => {
     const { baseElement } = render(
-      <Flag value="https://flagcdn.com/al.svg" xl />
+      <Flag value="https://flagcdn.com/al.svg" xl isMobile />
     );
 
     expect(baseElement).toBeTruthy();

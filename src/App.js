@@ -44,7 +44,7 @@ function App() {
           isMobile={isMobile}
         />
         <body>
-          <Box margin={isMobile ? "32px 0" : "32px 40px"}>
+          <Box margin={isMobile ? "32px 16px" : "32px 40px"}>
             <BrowserRouter>
               <Routes>
                 <Route path="/" element={<Home />} />

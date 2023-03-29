@@ -85,11 +85,12 @@ describe("BorderCountries component", () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it("should render successfully in dark mode", () => {
+  it("should render successfully in dark mode and mobile", () => {
     const { baseElement } = render(
       <BorderCountries
         handleDarkMode
         borderCountriesToMap={dataCountry_mocked}
+        isMobile
       />
     );
 
