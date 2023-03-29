@@ -12,8 +12,8 @@ describe("Filters component", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <CountryContext.Provider
-      value={{
-            setCountriesData: jest.fn,
+        value={{
+          setCountriesData: jest.fn,
           darkMode: false,
           isMobile: false,
         }}

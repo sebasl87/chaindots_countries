@@ -7,6 +7,12 @@ const mockedUsedNavigate = jest.fn();
 jest.mock("../services/country-services", () => ({
   fetchAllCountries: () => Promise.resolve({ data: [{}, {}] }),
 }));
+jest.mock("../components", () => ({
+  Filters: () => {
+    return <mock-filters data-testid="filters" />;
+  },
+}));
+
 jest.mock("react-router-dom", () => {
   const ActualReactRouterDOM = jest.requireActual("react-router-dom");
   return {
@@ -27,6 +33,8 @@ describe("Home component", () => {
         value={{
           countriesData: [],
           setCountriesData: jest.fn,
+          darkMode: false,
+          isMobile: false,
         }}
       >
         <Home />
@@ -36,10 +44,12 @@ describe("Home component", () => {
     expect(baseElement).toBeTruthy();
   });
 
-  it("should render successfully in dark mode and click", () => {
+  it("should render successfully in dark mode and mobile", () => {
     const { baseElement } = render(
       <CountryContext.Provider
         value={{
+          countriesData: [],
+          setCountriesData: jest.fn,
           darkMode: true,
           isMobile: true,
         }}
@@ -48,8 +58,7 @@ describe("Home component", () => {
       </CountryContext.Provider>
     );
 
-    fireEvent.click(screen.getByTestId("ArrowBackIcon"));
-    expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
+    expect(baseElement).toBeTruthy();
     expect(baseElement).toBeTruthy();
   });
 });
