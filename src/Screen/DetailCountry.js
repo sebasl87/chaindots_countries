@@ -10,12 +10,6 @@ import {
 } from "../services/country-services";
 import { CircularProgress } from "@mui/material";
 
-const borderCountriesToMap = [
-  { country: "France" },
-  { country: "Germany" },
-  { country: "Netherlands" },
-];
-
 const Layout = styled.div`
   display: flex;
   width: 100%;
@@ -45,6 +39,7 @@ export default function DetailCountry() {
 
   useEffect(() => {
     countryName && fetchDataForCountry();
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [countryName]);
 
   useEffect(() => {

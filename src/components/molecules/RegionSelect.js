@@ -1,12 +1,8 @@
-import React, { useState } from "react";
+import Reactn from "react";
 
 import { FormControl, MenuItem, Select } from "@mui/material";
 
-export const RegionSelect = () => {
-  const [value, setValue] = useState("");
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+export const RegionSelect = ({ value, handleChange }) => {
   return (
     <FormControl sx={{ minWidth: 200, boxShadow: 3 }}>
       <Select
