@@ -1,31 +1,35 @@
 import React from "react";
 import { fireEvent, render, screen } from "@testing-library/react";
-import Card from "./Card";
-import { CountryContext } from "../../App";
+import DetailCountry from "./DetailCountry";
+import { CountryContext } from "../App";
 
 const mockedUsedNavigate = jest.fn();
+jest.mock("../services/country-services", () => ({
+  fetchCountryBorders: () => Promise.resolve({ data: [] }),
+  fetchCountryByName: () => Promise.resolve({ data: [] }),
+}));
 jest.mock("react-router-dom", () => {
   const ActualReactRouterDOM = jest.requireActual("react-router-dom");
   return {
     ...ActualReactRouterDOM,
     useNavigate: () => mockedUsedNavigate,
+    useLocation: () => ({
+      state: {
+        countryName: "Uruguay",
+      },
+    }),
   };
 });
-describe("Card component", () => {
+describe("DetailCountry component", () => {
   it("should render successfully", () => {
     const { baseElement } = render(
       <CountryContext.Provider
         value={{
           darkMode: false,
+          isMobile: false,
         }}
       >
-        <Card
-          flag="https://flagcdn.com/bb.svg"
-          country="Uruguay"
-          population={54980}
-          region="America"
-          capital="Montevideo"
-        />
+        <DetailCountry />
       </CountryContext.Provider>
     );
 
@@ -37,18 +41,14 @@ describe("Card component", () => {
       <CountryContext.Provider
         value={{
           darkMode: true,
+          isMobile: true,
         }}
       >
-        <Card
-          flag="https://flagcdn.com/bb.svg"
-          country="Uruguay"
-          population={54980}
-          region="America"
-          capital="Montevideo"
-        />
+        <DetailCountry />
       </CountryContext.Provider>
     );
-    fireEvent.click(screen.getByRole("img"));
+
+    fireEvent.click(screen.getByTestId("ArrowBackIcon"));
     expect(mockedUsedNavigate).toHaveBeenCalledTimes(1);
     expect(baseElement).toBeTruthy();
   });
