@@ -1,9 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
 import { FormControl, MenuItem, Select } from "@mui/material";
 
 export const RegionSelect = () => {
-  const [value, setValue] = React.useState('');
+  const [value, setValue] = useState("");
   const handleChange = (event) => {
     setValue(event.target.value);
   };
@@ -18,11 +18,11 @@ export const RegionSelect = () => {
         <MenuItem value="">
           <em>Filter by Region</em>
         </MenuItem>
-        <MenuItem value={10}>Africa</MenuItem>
-        <MenuItem value={20}>America</MenuItem>
-        <MenuItem value={30}>Asia</MenuItem>
-        <MenuItem value={30}>Europe</MenuItem>
-        <MenuItem value={30}>Oceania</MenuItem>
+        <MenuItem value="Africa">Africa</MenuItem>
+        <MenuItem value="America">America</MenuItem>
+        <MenuItem value="Asia">Asia</MenuItem>
+        <MenuItem value="Europe">Europe</MenuItem>
+        <MenuItem value="Oceania">Oceania</MenuItem>
       </Select>
     </FormControl>
   );
