@@ -26,7 +26,7 @@ const ContainerCard = styled.div`
 `;
 
 export default function DetailCountry() {
-  const { darkMode } = useContext(CountryContext);
+  const { darkMode, isMobile } = useContext(CountryContext);
 
   const navigate = useNavigate();
   const {
@@ -59,20 +59,40 @@ export default function DetailCountry() {
   return (
     <Layout>
       <ContainerCard>
-        <BackBtn handleClick={() => navigate(-1)} darkMode={darkMode} />
+        <BackBtn
+          handleClick={() => navigate(-1)}
+          darkMode={darkMode}
+          flexDirection={isMobile ? "column" : "row"}
+          isMobile={isMobile}
+        />
         {countryInformation ? (
-          <Box display="flex" justifyContent="space-between" width="100%">
-            <Flag flag={countryInformation?.flags.svg} xl />
+          <Box
+            display="flex"
+            flexDirection={isMobile ? "column" : "row"}
+            justifyContent="space-between"
+            width="100%"
+          >
+            <Flag flag={countryInformation?.flags.svg} xl isMobile={isMobile} />
             <Box display="flex" width="100%" flexDirection="column">
               <TitleCountry xl title={countryInformation?.name.official} />
               <Box
                 display="flex"
-                width="100%"
+                flexDirection={isMobile ? "column" : "row"}
                 justifyContent="space-between"
                 mb={5}
+                width="100%"
               >
-                <Box display="flex" flexDirection="column" width="50%">
-                  <Property mb="12px" title="Native Name:" value="Belgie" />
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  width={isMobile ? "100%" : "50%"}
+                  marginRight={isMobile ? 0 : "8px"}
+                >
+                  <Property
+                    mb="12px"
+                    title="Native Name:"
+                    value={countryInformation?.name.official}
+                  />
                   <Property
                     mb="12px"
                     title="Population:"
@@ -94,7 +114,12 @@ export default function DetailCountry() {
                     value={countryInformation?.capital[0]}
                   />
                 </Box>
-                <Box display="flex" flexDirection="column" width="50%">
+                <Box
+                  display="flex"
+                  flexDirection="column"
+                  width={isMobile ? "100%" : "50%"}
+                  mt={isMobile && 5}
+                >
                   <Property
                     mb="12px"
                     title="Top Level Domain:"
@@ -120,6 +145,7 @@ export default function DetailCountry() {
                 <BorderCountries
                   borderCountriesToMap={borders}
                   handleDarkMode={darkMode}
+                  isMobile={isMobile}
                 />
               ) : (
                 <CircularProgress color="success" />

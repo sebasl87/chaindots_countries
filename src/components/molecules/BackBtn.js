@@ -24,10 +24,10 @@ const Button = styled.button`
     opacity: 0.7;
   }
 `;
-export default function BackBtn({ handleClick, darkMode }) {
+export default function BackBtn({ handleClick, darkMode, isMobile }) {
   return (
-    <Box mt={5} mb={10} display="flex">
-      <Button onClick={handleClick} darkMode={darkMode}>
+    <Box mt={isMobile ? 1 : 5} mb={isMobile ? 8 : 10} display="flex">
+      <Button onClick={handleClick} darkMode={darkMode} id="goBackClick">
         <ArrowBackIcon />
         <Typography ml={1}>Back</Typography>
       </Button>
