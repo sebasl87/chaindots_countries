@@ -26,4 +26,12 @@ describe("InputSearch component", () => {
 
     expect(baseElement).toBeTruthy();
   });
+
+  it("should render successfully in mobile with custom place holder", async () => {
+    const { baseElement } = render(
+      <InputSearch handleChange={handleChangeMocked} isMobile />
+    );
+
+    expect(baseElement).toBeTruthy();
+  });
 });

@@ -1,10 +1,12 @@
 import React, { createContext, useState, useEffect } from "react";
-import "./App.css";
+
 import { Header } from "./components";
 import DetailCountry from "./Screen/DetailCountry";
 import Home from "./Screen/Home";
 import { fetchAllCountries } from "./services/country-services";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
+import useMediaQuery from "@mui/material/useMediaQuery";
+import { Box } from "@mui/system";
 
 import { GlobalStyles } from "@mui/material";
 
@@ -28,23 +30,28 @@ function App() {
     fetchData();
   }, []);
 
+  const isMobile = useMediaQuery("(max-width:768px)");
+
   return (
     <CountryContext.Provider
-      value={{ countriesData, setCountriesData, darkMode }}
+      value={{ countriesData, setCountriesData, darkMode, isMobile }}
     >
       <GlobalStyles styles={darkMode ? darkTheme : lightTheme} />
       <div className="App">
         <Header
           handleClick={() => setDarkMode(!darkMode)}
           darkMode={darkMode}
+          isMobile={isMobile}
         />
-        <body className="App-body">
-          <BrowserRouter>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/details" element={<DetailCountry />} />
-            </Routes>
-          </BrowserRouter>
+        <body>
+          <Box margin={isMobile ? "32px 0" : "32px 40px"}>
+            <BrowserRouter>
+              <Routes>
+                <Route path="/" element={<Home />} />
+                <Route path="/details" element={<DetailCountry />} />
+              </Routes>
+            </BrowserRouter>
+          </Box>
         </body>
       </div>
     </CountryContext.Provider>

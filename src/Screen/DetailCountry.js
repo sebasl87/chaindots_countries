@@ -26,7 +26,7 @@ const ContainerCard = styled.div`
 `;
 
 export default function DetailCountry() {
-  const { darkMode } = useContext(CountryContext);
+  const { darkMode, isMobile } = useContext(CountryContext);
 
   const navigate = useNavigate();
   const {
@@ -59,7 +59,11 @@ export default function DetailCountry() {
   return (
     <Layout>
       <ContainerCard>
-        <BackBtn handleClick={() => navigate(-1)} darkMode={darkMode} />
+        <BackBtn
+          handleClick={() => navigate(-1)}
+          darkMode={darkMode}
+          flexDirection={isMobile ? "column" : "row"}
+        />
         {countryInformation ? (
           <Box display="flex" justifyContent="space-between" width="100%">
             <Flag flag={countryInformation?.flags.svg} xl />

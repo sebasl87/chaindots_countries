@@ -7,16 +7,20 @@ export const InputSearch = ({
   placeHolder = "Search for a country...",
   handleChange,
   darkMode,
+  isMobile
 }) => {
   return (
     <TextField
       onChange={handleChange}
       sx={{
-        boxShadow: 3,
-        width: "100%",
-        maxWidth: "500px",
         background: darkMode && "#2B3743",
+        boxShadow: 3,
         input: { color: darkMode && "#fff" },
+        marginBottom: isMobile && "32px",
+        marginRight: !isMobile && "16px",
+        maxWidth: "500px",
+        width: "100%",
+
       }}
       id="input-with-sx"
       placeholder={placeHolder}
