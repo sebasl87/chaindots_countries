@@ -8,18 +8,18 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 
 export const CountryContext = createContext();
 function App() {
-  const [countryData, setCountryData] = useState(null);
+  const [countriesData, setCountriesData] = useState(null);
 
   const fetchData = async () => {
     const data = await fetchAllCountries();
-    setCountryData(data);
+    setCountriesData(data);
   };
 
   useEffect(() => {
     fetchData();
   }, []);
 
-  const countries = useMemo(() => countryData, [countryData]);
+  const countries = useMemo(() => countriesData, [countriesData]);
 
   return (
     <CountryContext.Provider value={{ countries }}>

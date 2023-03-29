@@ -7,9 +7,18 @@ export const fetchAllCountries = async () => {
   ).then((response) => response.json());
 };
 
-export const fetchCountryByName = async ({ countryName }) => {
+export const fetchCountryByName = async (countryName) => {
   return fetch(
-    `${process.env.REACT_APP_API_URL}name/${countryName}?fields=name,region,subregion,capital,languages,borders,population,tld,currencies,idd&fullText=true`,
+    `${process.env.REACT_APP_API_URL}name/${countryName}?fields=name,region,subregion,capital,languages,borders,population,tld,currencies,flags,idd&fullText=true`,
+    {
+      method: "GET",
+    }
+  ).then((response) => response.json());
+};
+
+export const fetchCountryBorders = async (countryBordersName) => {
+  return fetch(
+    `${process.env.REACT_APP_API_URL}alpha?codes=${countryBordersName}&fields=name`,
     {
       method: "GET",
     }

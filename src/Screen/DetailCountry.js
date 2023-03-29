@@ -1,9 +1,14 @@
 import { Box } from "@mui/system";
-import React from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { BackBtn, BorderCountries, Flag, TitleCountry } from "../components";
 import Property from "../components/molecules/Property";
 import { useLocation, useNavigate } from "react-router-dom";
+import {
+  fetchCountryBorders,
+  fetchCountryByName,
+} from "../services/country-services";
+import { CircularProgress } from "@mui/material";
 
 const borderCountriesToMap = [
   { country: "France" },
@@ -26,47 +31,104 @@ const ContainerCard = styled.div`
 
 export default function DetailCountry() {
   const navigate = useNavigate();
+  const {
+    state: { countryName },
+  } = useLocation();
 
-  const location = useLocation();
-  console.log(location);
+  const [countryData, setCountryData] = useState();
+  const [borders, setBorders] = useState([]);
+
+  const fetchDataForCountry = async () => {
+    const data = await fetchCountryByName(countryName);
+    setCountryData(data[0]);
+  };
+
+  useEffect(() => {
+    countryName && fetchDataForCountry();
+  }, [countryName]);
+
+  useEffect(() => {
+    countryData &&
+      countryData.borders.length &&
+      fetchCountryBorders(countryData.borders.toString()).then((data) =>
+        setBorders(data)
+      );
+  }, [countryData]);
+
+  const countryInformation = useMemo(() => countryData, [countryData]);
+
   return (
     <Layout>
       <ContainerCard>
         <BackBtn handleClick={() => navigate(-1)} />
-        <Box display="flex" justifyContent="space-between" width="100%">
-          <Flag flag="https://flagcdn.com/be.svg" xl />
-          <Box display="flex" width="100%" flexDirection="column">
-            <TitleCountry xl title="Belgium" />
-            <Box
-              display="flex"
-              width="100%"
-              justifyContent="space-between"
-              mb={6}
-            >
-              <Box display="flex" flexDirection="column">
-                <Property mb="12px" title="Native Name:" value="Belgie" />
-                <Property mb="12px" title="Population:" value={3} />
-                <Property mb="12px" title="Region:" value="Europe" />
-                <Property
-                  mb="12px"
-                  title="Sub Region:"
-                  value="Western Europe"
-                />
-                <Property mb="12px" title="Capital:" value="Brusells" />
+        {countryInformation ? (
+          <Box display="flex" justifyContent="space-between" width="100%">
+            <Flag flag={countryInformation?.flags.svg} xl />
+            <Box display="flex" width="100%" flexDirection="column">
+              <TitleCountry xl title={countryInformation?.name.official} />
+              <Box
+                display="flex"
+                width="100%"
+                justifyContent="space-between"
+                mb={6}
+              >
+                <Box display="flex" flexDirection="column">
+                  <Property mb="12px" title="Native Name:" value="Belgie" />
+                  <Property
+                    mb="12px"
+                    title="Population:"
+                    value={countryInformation?.population.toLocaleString()}
+                  />
+                  <Property
+                    mb="12px"
+                    title="Region:"
+                    value={countryInformation?.region}
+                  />
+                  <Property
+                    mb="12px"
+                    title="Sub Region:"
+                    value={countryInformation?.subregion}
+                  />
+                  <Property
+                    mb="12px"
+                    title="Capital:"
+                    value={countryInformation?.capital[0]}
+                  />
+                </Box>
+                <Box display="flex" flexDirection="column">
+                  <Property
+                    mb="12px"
+                    title="Top Level Domain:"
+                    value={countryInformation?.tld[0]}
+                  />
+                  <Property
+                    mb="12px"
+                    title="Currencies:"
+                    value={
+                      Object.values(countryInformation?.currencies)[0].name
+                    }
+                  />
+                  <Property
+                    mb="12px"
+                    title="Languages:"
+                    value={Object.values(countryInformation?.languages).join(
+                      ", "
+                    )}
+                  />
+                </Box>
               </Box>
-              <Box display="flex" flexDirection="column">
-                <Property mb="12px" title="Top Level Domain:" value=".be" />
-                <Property mb="12px" title="Currencies:" value="Euro" />
-                <Property
-                  mb="12px"
-                  title="Languages:"
-                  value="Dutch, French, German"
-                />
-              </Box>
+              {borders ? (
+                <BorderCountries borderCountriesToMap={borders} />
+              ) : (
+                <CircularProgress color="success" />
+              )}
             </Box>
-            <BorderCountries borderCountriesToMap={borderCountriesToMap} />
           </Box>
-        </Box>
+        ) : (
+          <Box width="100%" margin="auto">
+            <CircularProgress color="success" />
+          </Box>
+        )}
       </ContainerCard>
     </Layout>
   );

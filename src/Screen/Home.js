@@ -3,6 +3,8 @@ import styled from "styled-components";
 import { dataCountry } from "../services/dataCountry";
 import { Card, Filters } from "../components";
 import { CountryContext } from "../App";
+import { CircularProgress } from "@mui/material";
+import { Box } from "@mui/system";
 
 const Table = styled.div`
   display: grid;
@@ -28,7 +30,7 @@ export default function Home() {
       <Layout>
         <Filters />
         <Table>
-          {countries &&
+          {countries ? (
             countries.map((el) => (
               <Card
                 capital={el.capital[0]}
@@ -38,7 +40,12 @@ export default function Home() {
                 population={el.population}
                 region={el.region}
               />
-            ))}
+            ))
+          ) : (
+            <Box width="100%" margin="auto">
+              <CircularProgress color="success" />
+            </Box>
+          )}
         </Table>
       </Layout>
     </>
