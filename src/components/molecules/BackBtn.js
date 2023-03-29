@@ -6,7 +6,8 @@ import { Typography } from "@mui/material";
 
 const Button = styled.button`
   align-items: center;
-  background: #fff;
+  background: ${(props) => (props.darkMode ? "#2B3743" : "#fff")};
+  color: ${(props) => props.darkMode && "#fff"};
   border-radius: 6px;
   border: 0;
   display: flex;
@@ -23,10 +24,10 @@ const Button = styled.button`
     opacity: 0.7;
   }
 `;
-export default function BackBtn({ handleClick }) {
+export default function BackBtn({ handleClick, darkMode }) {
   return (
     <Box mt={5} mb={10} display="flex">
-      <Button onClick={handleClick}>
+      <Button onClick={handleClick} darkMode={darkMode}>
         <ArrowBackIcon />
         <Typography ml={1}>Back</Typography>
       </Button>

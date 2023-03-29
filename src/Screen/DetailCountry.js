@@ -1,5 +1,5 @@
 import { Box } from "@mui/system";
-import React, { useEffect, useMemo, useState } from "react";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import styled from "styled-components";
 import { BackBtn, BorderCountries, Flag, TitleCountry } from "../components";
 import Property from "../components/molecules/Property";
@@ -9,11 +9,12 @@ import {
   fetchCountryByName,
 } from "../services/country-services";
 import { CircularProgress } from "@mui/material";
+import { CountryContext } from "../App";
 
 const Layout = styled.div`
   display: flex;
   justify-content: center;
-  margin:auto;
+  margin: auto;
   max-width: 1200px;
   width: 100%;
 `;
@@ -25,6 +26,8 @@ const ContainerCard = styled.div`
 `;
 
 export default function DetailCountry() {
+  const { darkMode } = useContext(CountryContext);
+
   const navigate = useNavigate();
   const {
     state: { countryName },
@@ -56,7 +59,7 @@ export default function DetailCountry() {
   return (
     <Layout>
       <ContainerCard>
-        <BackBtn handleClick={() => navigate(-1)} />
+        <BackBtn handleClick={() => navigate(-1)} darkMode={darkMode} />
         {countryInformation ? (
           <Box display="flex" justifyContent="space-between" width="100%">
             <Flag flag={countryInformation?.flags.svg} xl />
@@ -114,7 +117,10 @@ export default function DetailCountry() {
                 </Box>
               </Box>
               {borders ? (
-                <BorderCountries borderCountriesToMap={borders} />
+                <BorderCountries
+                  borderCountriesToMap={borders}
+                  handleDarkMode={darkMode}
+                />
               ) : (
                 <CircularProgress color="success" />
               )}
